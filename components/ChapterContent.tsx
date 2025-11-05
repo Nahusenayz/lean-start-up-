@@ -15,23 +15,37 @@ interface ChapterContentProps {
 
 const logoBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX/////AAD/zMz/4eH/8PD/9PT/tLT/xsb/1NT/p6f/ysr/7e3/oqL/5ub/nJz/goL/3d3/l5f/rq7/ZmZ/a2v/iIj/f39/Kir/UFD/OTl/Ly9/Pz9/SEh/Hh5/DQ3/vr5/c3P/VFR+y909AAAD9ElFTVR4nO2d23qiMBCGMzAEUbriBcVXvP/b3EDoXRIJ0rSW7E73/WCeCQ8CaU56vV4AAAAAAAAAAAAAAAAAAAAAAAAAAMC/R8x+nYx8bFt1b28n31l2l93dWc/Ne/ZbJqI/R8x+r4lY75x28MvHTz6aN++7u7NNR6z3MyaR6/j8+bx/6xpr7cWrP0fMft1k4j10y+FXTz7atG9vV5OOWe/nmETu6Tfn8/7tY2xtvfrp5+j5j9nxj4hn7/jJhzP27e1q0zFrfT9jErlh377uQ0ytvfz0c/T8x+z4h4hn7/jJhzP27e1q0zFrfT9jErlh377uQ0ytvfz0c/T8x+z4h4hn7/jJhzP27e1q0zFrfT9jErlh377uQ0ytvfz0c/T8x+z4h4hn7/jJhzP27e1q0zFrfT9jErlh377uQ0ytvfz085fP/L7Y+C8Rz97xkw9n7Nvb1abD1vN9jEzkjp1s8g8xtfbw489fP/L7Y+O/RDx7x08+nLNvb1ebDlvP9zEykTt2ssg/xNTaA48/fvkP0uMfs+MfsZ+94ycftrBvb1ebDlvP9zEykTt2ssg/xNTaA48/fvkP0uMfs+MfsZ+94ycftrBvb1ebDlvP9zEykTt2ssg/xNTaA48/fvkP0uMfs+MfsZ+94ycftrBvb1ebDlvP9zEykTt2ssg/xNTaA48/fvkP0uMfs+MfsZ+94ycftrBvb1ebDlvP9zEykTt2ssg/xNTaA48/fvk/j158Y8c/Yj97x08+bGHf3q42HbbW72Mykbt2sugHxNSaA48/fvnvxqM3bvyXmM/e8ZMPW9i3t6tNhy31expM5I6dbPIPMbX28OPHXz7y+2PjvyQ8e8dPPpxh396uNh22nu9jYiJ37GSRf4iptefx45e/IB7/mB3/iP3sHT/5sIV9e7vatNh6vp+Jidixk0X+IabWnn/88hfE4x+z4x+xn73jJx+2sG9vV5sOW8/3MTERO3ayyD/E1Frzjz9++QvisY/Z8Y/Yz97xk/8/tW9vV5sOW8/3MTERO3ayyD/E1Frzjz9++QvisY/Z8Y/Yz97xk/8/tW9vV5sOW8/3MTERO3ayyD/E1Frzjz9++QvisY/Z8Y/Yz97xk/8/tW9vV5sOW8/3MTERO3ayyD/E1Nrzz18+8vtj479EPPvGTz6cYd/erjYdtp7vY2Iid+xkkX+IqTXn/OUn0eMfs+MfsZ+94ycftrBvb1ebDlvP9zEykTt2ssg/xNTa859/fvk98fhH7PjH7Gfv+MmHLexbVzctNh2j3vdjIpG7dnaZf4iptef/38tfX49/zI5/xH72jp982MK+dd3csulY9b5fE4nc0bPL/ENMrT3//OWX1+Mfs+MfsZ+94ycftrBvXde2LDYdo97/YzKRu3Z2mX+IqTXn/+WX3xKPf8yOf8R+9o6ffNjCvnXd3LLpWNW+XxOJ3NGzy/xDTK09//zl19fjH7PjH7GfveMnH7awb13Xtiw2HaPe/2Mykbt2dpl/iKk15//ll98Sj3/Mjn/EfvbdXbec3RjzV+Xz1e7y/e6ueS22AAAAAAAAAAAAAAAAAAAAAAAAAAAAgD/kLwz1/xVhfOTmAAAAAElFTVRSuQmCC";
 
-const WelcomeMessage: React.FC = () => (
-    <div className="text-center flex flex-col items-center justify-center h-full max-w-2xl mx-auto">
-        <div className="w-full max-w-2xl h-96 bg-slate-200 dark:bg-slate-700 rounded-xl shadow-2xl flex flex-col items-center justify-center mb-8 overflow-hidden">
-            <img 
-                src="/logo-color%20(2).png" 
-                alt="Tech Space ET Logo" 
-                className="w-full h-full object-contain p-4" 
-            />
-        </div>
-        <h1 className="mt-1 text-3xl font-extrabold text-slate-900 dark:text-slate-100 sm:text-4xl tracking-tight">
-            Tech Space ET presents the Lean Startup by Eric Ries
-        </h1>
-        <p className="mt-4 text-slate-600 dark:text-slate-400">
-            Select a chapter from the menu to view an AI-powered summary of its key concepts and principles.
-        </p>
+const WelcomeMessage: React.FC = () => {
+  const handleStartReading = () => {
+    // Navigate to the first chapter
+    window.location.hash = 'intro';
+    // Force a reload to trigger the chapter load
+    window.dispatchEvent(new Event('hashchange'));
+  };
+
+  return (
+    <div className="text-center flex flex-col items-center justify-center h-full max-w-2xl mx-auto py-12">
+      <h1 className="text-4xl font-extrabold text-slate-900 dark:text-slate-100 sm:text-5xl tracking-tight mb-6">
+        The Lean Startup
+      </h1>
+      <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">
+        How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses
+      </p>
+      <p className="text-lg text-slate-500 dark:text-slate-300 mb-8">
+        by Eric Ries
+      </p>
+      <button
+        onClick={handleStartReading}
+        className="px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+      >
+        Start Reading
+      </button>
+      <p className="mt-6 text-sm text-slate-500 dark:text-slate-400">
+        Or select a chapter from the menu
+      </p>
     </div>
-);
+  );
+};
 
 const TranslateIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
