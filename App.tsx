@@ -96,6 +96,10 @@ const App: React.FC = () => {
     }
   };
 
+  const handleStartReading = () => {
+    setIsSidebarOpen(true);
+  };
+
   return (
     <div className="relative flex flex-col min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
       <div className="flex-1 md:flex">
@@ -128,6 +132,7 @@ const App: React.FC = () => {
             onNext={handleNextChapter}
             hasPrevious={hasPrevious}
             hasNext={hasNext}
+            onStartReading={handleStartReading}
           />
         </main>
       </div>
