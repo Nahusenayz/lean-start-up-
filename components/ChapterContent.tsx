@@ -19,9 +19,9 @@ const WelcomeMessage: React.FC = () => (
     <div className="text-center flex flex-col items-center justify-center h-full max-w-2xl mx-auto">
         <div className="w-full max-w-2xl h-96 bg-slate-200 dark:bg-slate-700 rounded-xl shadow-2xl flex flex-col items-center justify-center mb-8 overflow-hidden">
             <img 
-                src="/logo-color (2).png" 
+                src="/logo-color%20(2).png" 
                 alt="Tech Space ET Logo" 
-                className="w-full h-full object-cover" 
+                className="w-full h-full object-contain p-4" 
             />
         </div>
         <h1 className="mt-1 text-3xl font-extrabold text-slate-900 dark:text-slate-100 sm:text-4xl tracking-tight">
