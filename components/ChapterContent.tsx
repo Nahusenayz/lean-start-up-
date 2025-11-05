@@ -1,6 +1,7 @@
 
 import React from 'react';
 import type { Chapter } from '../types';
+import { chapterStructure } from '../constants';
 
 interface ChapterContentProps {
   chapter: Chapter | null;
@@ -17,17 +18,24 @@ const logoBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAA
 
 const WelcomeMessage: React.FC = () => {
   const handleStartReading = () => {
-    // Get the first chapter ID from the chapter structure
-    const firstChapterId = 'ch1'; // First chapter after introduction
-    
-    // Update the URL hash to trigger navigation
-    window.location.hash = `#${firstChapterId}`;
-    
-    // Force a reload of the chapter content
-    window.dispatchEvent(new HashChangeEvent('hashchange'));
-    
-    // Smooth scroll to top for better UX
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Find the first chapter (skipping the introduction)
+    const firstChapter = chapterStructure.find(part => part.chapters.some(ch => ch.id === 'ch1'));
+    if (firstChapter) {
+      const firstChapterId = 'ch1'; // First chapter after introduction
+      
+      // Update the URL hash
+      window.location.hash = firstChapterId;
+      
+      // Force the app to recognize the hash change
+      const hashChangeEvent = new HashChangeEvent('hashchange', {
+        oldURL: window.location.href,
+        newURL: `${window.location.origin}${window.location.pathname}#${firstChapterId}`
+      });
+      window.dispatchEvent(hashChangeEvent);
+      
+      // Force a reload of the chapter content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -45,25 +53,13 @@ const WelcomeMessage: React.FC = () => {
           by Eric Ries
         </p>
         
-        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+        <div className="flex justify-center">
           <button
             onClick={handleStartReading}
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg text-base sm:text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
+            className="px-8 sm:px-10 py-3 sm:py-4 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg text-lg sm:text-xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all w-full max-w-xs"
           >
             Start Reading
           </button>
-          
-          <a 
-            href="#intro" 
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-medium rounded-lg text-base sm:text-lg transition-colors duration-200 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 shadow-sm"
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.hash = 'intro';
-              window.dispatchEvent(new HashChangeEvent('hashchange'));
-            }}
-          >
-            Read Introduction
-          </a>
         </div>
         
         <p className="mt-8 text-sm sm:text-base text-slate-500 dark:text-slate-400">
