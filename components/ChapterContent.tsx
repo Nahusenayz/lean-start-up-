@@ -17,32 +17,59 @@ const logoBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAA
 
 const WelcomeMessage: React.FC = () => {
   const handleStartReading = () => {
-    // Navigate to the first chapter
-    window.location.hash = 'intro';
-    // Force a reload to trigger the chapter load
-    window.dispatchEvent(new Event('hashchange'));
+    // Get the first chapter ID from the chapter structure
+    const firstChapterId = 'ch1'; // First chapter after introduction
+    
+    // Update the URL hash to trigger navigation
+    window.location.hash = `#${firstChapterId}`;
+    
+    // Force a reload of the chapter content
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+    
+    // Smooth scroll to top for better UX
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="text-center flex flex-col items-center justify-center h-full max-w-2xl mx-auto py-12">
-      <h1 className="text-4xl font-extrabold text-slate-900 dark:text-slate-100 sm:text-5xl tracking-tight mb-6">
-        The Lean Startup
-      </h1>
-      <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">
-        How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses
-      </p>
-      <p className="text-lg text-slate-500 dark:text-slate-300 mb-8">
-        by Eric Ries
-      </p>
-      <button
-        onClick={handleStartReading}
-        className="px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
-      >
-        Start Reading
-      </button>
-      <p className="mt-6 text-sm text-slate-500 dark:text-slate-400">
-        Or select a chapter from the menu
-      </p>
+    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-3xl text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight mb-4 sm:mb-6">
+          The Lean Startup
+        </h1>
+        
+        <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-6 sm:mb-8 max-w-2xl mx-auto">
+          How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses
+        </p>
+        
+        <p className="text-lg sm:text-xl text-slate-500 dark:text-slate-300 mb-8 sm:mb-10">
+          by Eric Ries
+        </p>
+        
+        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+          <button
+            onClick={handleStartReading}
+            className="px-6 sm:px-8 py-3 sm:py-4 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg text-base sm:text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
+          >
+            Start Reading
+          </button>
+          
+          <a 
+            href="#intro" 
+            className="px-6 sm:px-8 py-3 sm:py-4 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-medium rounded-lg text-base sm:text-lg transition-colors duration-200 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 shadow-sm"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.hash = 'intro';
+              window.dispatchEvent(new HashChangeEvent('hashchange'));
+            }}
+          >
+            Read Introduction
+          </a>
+        </div>
+        
+        <p className="mt-8 text-sm sm:text-base text-slate-500 dark:text-slate-400">
+          Or select a chapter from the menu
+        </p>
+      </div>
     </div>
   );
 };
