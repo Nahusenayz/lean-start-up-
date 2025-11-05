@@ -128,7 +128,6 @@ const App: React.FC = () => {
             onNext={handleNextChapter}
             hasPrevious={hasPrevious}
             hasNext={hasNext}
-            onOpenMenu={() => setIsSidebarOpen(true)}
           />
         </main>
       </div>
