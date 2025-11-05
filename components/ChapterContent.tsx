@@ -18,24 +18,20 @@ const logoBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAA
 
 const WelcomeMessage: React.FC = () => {
   const handleStartReading = () => {
-    // Find the first chapter (skipping the introduction)
-    const firstChapter = chapterStructure.find(part => part.chapters.some(ch => ch.id === 'ch1'));
-    if (firstChapter) {
-      const firstChapterId = 'ch1'; // First chapter after introduction
-      
-      // Update the URL hash
-      window.location.hash = firstChapterId;
-      
-      // Force the app to recognize the hash change
-      const hashChangeEvent = new HashChangeEvent('hashchange', {
-        oldURL: window.location.href,
-        newURL: `${window.location.origin}${window.location.pathname}#${firstChapterId}`
-      });
-      window.dispatchEvent(hashChangeEvent);
-      
-      // Force a reload of the chapter content
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    const targetId = 'intro'; // Open the Introduction chapter
+
+    // Update the URL hash
+    window.location.hash = `#${targetId}`;
+
+    // Notify app about hash change
+    const hashChangeEvent = new HashChangeEvent('hashchange', {
+      oldURL: window.location.href,
+      newURL: `${window.location.origin}${window.location.pathname}#${targetId}`
+    });
+    window.dispatchEvent(hashChangeEvent);
+
+    // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

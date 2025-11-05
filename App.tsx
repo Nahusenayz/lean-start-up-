@@ -42,11 +42,33 @@ const App: React.FC = () => {
       updateSummary(selectedChapter, language);
     }
   }, [selectedChapter, language, updateSummary]);
+
+  // Sync selected chapter with URL hash on load and when hash changes
+  useEffect(() => {
+    const applyHash = () => {
+      const id = window.location.hash?.replace('#', '');
+      if (!id) return;
+      const match = allChapters.find(c => c.id === id);
+      if (match) {
+        setSelectedChapter(prev => (prev?.id === match.id ? prev : match));
+      }
+    };
+    // Apply on mount
+    applyHash();
+    // Listen for changes
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, [allChapters]);
   
   const handleSelectChapter = (chapter: Chapter) => {
     setSelectedChapter(chapter);
     setLanguage('en'); // Reset to English on new chapter selection
     setIsSidebarOpen(false); // Close sidebar on mobile after selection
+
+    // Keep URL in sync
+    if (window.location.hash !== `#${chapter.id}`) {
+      window.location.hash = `#${chapter.id}`;
+    }
 
     // Smoothly scroll to the top of the content
     // A small timeout allows the sidebar closing animation to start, creating a smoother feel
