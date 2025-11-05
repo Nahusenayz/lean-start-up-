@@ -1,0 +1,5 @@
+{
+  "name": "The Lean Startup Companion",
+  "description": "An interactive web application that provides AI-generated summaries for each chapter of 'The Lean Startup' by Eric Ries, offering a quick and insightful guide to the book's core principles.",
+  "requestFramePermissions": []
+}
