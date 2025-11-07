@@ -24,7 +24,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ chapters, selectedChapter, onS
       <div className="flex flex-col h-full bg-white dark:bg-slate-800">
         <div className="p-4 border-b border-slate-200 dark:border-slate-700">
           <div className="flex items-center space-x-3">
-            <BookIcon className="h-8 w-8 text-sky-600 dark:text-sky-400" />
+            <img src="logo-color (2).png" alt="Logo" className="h-8 w-8" />
             <div>
               <h1 className="text-lg font-bold text-slate-800 dark:text-slate-100">The Lean Startup</h1>
               <p className="text-xs text-slate-500 dark:text-slate-400">Chapter Summaries</p>
